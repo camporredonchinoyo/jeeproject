@@ -15,7 +15,7 @@ public class EmpleadoTest {
 	public void setUp() throws Exception {
 		empleado1= new Empleado("71134014m");
 	}
-// mas cosas
+
 	@After
 	public void tearDown() throws Exception {
 	}
