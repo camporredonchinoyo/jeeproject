@@ -9,6 +9,6 @@ public class HelloWorldTest {
 	@Test
 	public void test() {
 		assertTrue(HelloWorld.hello("pepe").equals("hello pepe"));
-	}
+	} 
 
 }
