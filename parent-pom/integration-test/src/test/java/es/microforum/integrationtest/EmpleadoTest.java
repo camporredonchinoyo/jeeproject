@@ -8,6 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -29,6 +31,8 @@ public class EmpleadoTest {
 	@Autowired
 	EmpleadoService empleadoService;
 	
+	private static final Logger logger = LoggerFactory.getLogger(EmpleadoTest.class);
+	
 	Empleado empleado1;
 	Empleado empleado2;
 	
@@ -46,8 +50,10 @@ public class EmpleadoTest {
 	@Test
 	@Transactional
 	public void testFindAll() {
+		logger.error("**************************!!!!!!!!!!!!!!!!!!!!!!!");
 		List<Empleado> empleados = empleadoService.findAll();
 		empleados.size();
+		logger.trace("Ejecutando metodo findAll");
 		assertTrue(empleados.isEmpty());
 	}
 	
