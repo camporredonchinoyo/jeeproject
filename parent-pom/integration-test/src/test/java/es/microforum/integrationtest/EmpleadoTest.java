@@ -42,33 +42,43 @@ public class EmpleadoTest {
 	@After
 	public void tearDown() throws Exception {
 	}
+	
+	
+////	@Test
+////	@Transactional
+////	public void testSave() {
+////		empleado2 = new Empleado("71134014", null, "nombre", "direccion", "tipoEmpleado", "empleadocol", 10000.0, 10.0, 15.0, null);
+////		empleadoService.save(empleado2);
+////		assertTrue(empleadoService.findByDni("71134014").equals(empleado2));
+////	}
+
+////	@Test
+////	@Transactional
+////	public void testFindAll() {
+////		List<Empleado> empleados = empleadoService.findAll();
+////		//empleados.size();
+////		assertTrue(empleados.isEmpty());
+////	}
+//
+//	
+////	@Test
+////	@Transactional
+////	public void testFindByDni() {
+////		empleado2 = new Empleado("71134014", null, "nombre", "direccion", "tipoEmpleado", "empleadocol", 10000.0, 10.0, 15.0, null);
+////		empleadoService.save(empleado2);
+////		assertTrue(empleadoService.findByDni("71134014").equals(empleado2));
+////		
+////	}
+
 
 	@Test
-	@Transactional
-	public void testFindAll() {
-		List<Empleado> empleados = empleadoService.findAll();
-		assertTrue(empleados.isEmpty());
-	}
-
-
-	@Test
-	@Transactional
-	public void testSave() {
+	public void testDelete() {
 		empleado2 = new Empleado("71134014", null, "nombre", "direccion", "tipoEmpleado", "empleadocol", 10000.0, 10.0, 15.0, null);
 		empleadoService.save(empleado2);
-		assertTrue(empleadoService.findByDni("71134014").equals(empleado2));
-	}
+		empleadoService.delete(empleado2);
+		List<Empleado> empleados = empleadoService.findAll();
+		assertTrue(empleados.isEmpty());
 	
-	@Test
-	@Transactional
-	public void testFindByDni() {
-		
 	}
-
-//
-//	@Test
-//	public void testDelete() {
-//		fail("Not yet implemented");
-//	}
 
 }
