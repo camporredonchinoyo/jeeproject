@@ -38,8 +38,8 @@ public class EmpleadoTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		//empleadoService = contexto.getBean("springJpaEmpleadoService", EmpleadoService.class); no hace falta porque esta el autowired y se encarga de ello
 		empleado1 = new Empleado("71134014");
+		empleado2 = new Empleado("71134014", null, "nombre", "direccion", "tipoEmpleado", "empleadocol", 10000.0, 10.0, 15.0, null);
 		
 	}
 
@@ -50,7 +50,6 @@ public class EmpleadoTest {
 	@Test
 	@Transactional
 	public void testFindAll() {
-		logger.error("**************************!!!!!!!!!!!!!!!!!!!!!!!");
 		List<Empleado> empleados = empleadoService.findAll();
 		empleados.size();
 		logger.trace("Ejecutando metodo findAll");
@@ -61,7 +60,6 @@ public class EmpleadoTest {
 	@Test
 	@Transactional
 	public void testSave() {
-		empleado2 = new Empleado("71134014", null, "nombre", "direccion", "tipoEmpleado", "empleadocol", 10000.0, 10.0, 15.0, null);
 		empleadoService.save(empleado2);
 		assertTrue(empleadoService.findByDni("71134014").equals(empleado2));
 	}
@@ -72,7 +70,6 @@ public class EmpleadoTest {
 	@Test
 	@Transactional
 	public void testFindByDni() {
-		empleado2 = new Empleado("71134014", null, "nombre", "direccion", "tipoEmpleado", "empleadocol", 10000.0, 10.0, 15.0, null);
 		empleadoService.save(empleado2);
 		assertTrue(empleadoService.findByDni("71134014").equals(empleado2));
 		
@@ -81,7 +78,6 @@ public class EmpleadoTest {
 
 	@Test
 	public void testDelete() {
-		empleado2 = new Empleado("71134014", null, "nombre", "direccion", "tipoEmpleado", "empleadocol", 10000.0, 10.0, 15.0, null);
 		empleadoService.save(empleado2);
 		empleadoService.delete(empleado2);
 		List<Empleado> empleados = empleadoService.findAll();
