@@ -50,8 +50,8 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
 	@Override
 	@Transactional(readOnly=true)
-	public Page<Empleado> findByNombre(Pageable pageable, String nombre) {
-		return empleadoRepository.findByNombre(pageable, nombre);
+	public Page<Empleado> findAll(Pageable pageable) {
+	return empleadoRepository.findAll(pageable);
 	}
 
 }

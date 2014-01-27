@@ -21,5 +21,5 @@ public interface EmpleadoService {
 	public void delete(Empleado Empleado);
 	
 	//buscar un empleado por nombre
-	public Page<Empleado> findByNombre(Pageable pageable, String nombre);
+	public Page<Empleado> findAll(Pageable pageable);
 }
