@@ -23,6 +23,9 @@ public interface EmpleadoService {
 	// Delete a Empleado	
 	public void delete(Empleado Empleado);
 	
+	// Delete a Empleado	
+	public void deleteById(String Id);
+	
 	//buscar un empleado por nombre
 	public Page<Empleado> findByNombre(String nombre, Pageable pageable);
 }

@@ -77,6 +77,7 @@ public class EmpleadoTest {
 
 
 	@Test
+	@Transactional
 	public void testDelete() {
 		empleadoService.save(empleado2);
 		empleadoService.delete(empleado2);

@@ -36,14 +36,13 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 	}
 
 	@Override
-	@Transactional(readOnly=true)
 	public Empleado save(Empleado empleado) {
 		return empleadoRepository.save(empleado);
 	}
 
 	@Override
-	@Transactional(readOnly=true)
 	public void delete(Empleado empleado) {
+		//empleadoRepository.delete(id);
 		empleadoRepository.delete(empleado);
 		
 	}
@@ -58,6 +57,11 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 	@Transactional(readOnly=true)
 	public Page<Empleado> findByNombre(String nombre, Pageable pageable) {
 		return empleadoRepository.findByNombre(nombre, pageable);
+	}
+
+	@Override
+	public void deleteById(String id) {
+		empleadoRepository.delete(id);
 	}
 
 }
