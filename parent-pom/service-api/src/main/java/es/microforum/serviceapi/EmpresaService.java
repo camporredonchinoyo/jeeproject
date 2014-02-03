@@ -9,8 +9,12 @@ import es.microforum.model.Empleado;
 import es.microforum.model.Empresa;
 
 public interface EmpresaService {
+	
 	// Find all Empresa
-	public List<Empresa> findAll();
+	public List<Empresa> findAllEmpresas();
+	
+	// Find all Empresa
+	public Page<Empresa> findAll(Pageable pageable);
 	
 	// Find all Empresa by nif
 	public Empresa findByNif(String nif);

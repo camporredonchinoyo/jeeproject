@@ -12,7 +12,7 @@ import es.microforum.model.Empleado;
 
 public interface EmpleadoService {
 	// Find all Empleado
-	public List<Empleado> findAll();
+	public Page<Empleado> findAll(Pageable pageable);
 	
 	// Find all Empleado by nif
 	public Empleado findByDni(String dni);

@@ -26,8 +26,8 @@ public class EmpresaServiceImpl implements EmpresaService {
 	
 	@Override
 	@Transactional(readOnly=true)
-	public List<Empresa> findAll() {
-		return Lists.newArrayList(empresaRepository.findAll());
+	public Page<Empresa> findAll(Pageable pageable) {
+		return empresaRepository.findAll(pageable);
 	}
 
 	@Override
@@ -37,13 +37,13 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional
 	public Empresa save(Empresa empresa) {
 		return empresaRepository.save(empresa);
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional
 	public void delete(Empresa empleado) {
 		empresaRepository.delete(empleado);
 		
@@ -54,6 +54,13 @@ public class EmpresaServiceImpl implements EmpresaService {
 	public Page<Empresa> findByNombre(String nombre, Pageable pageable) {
 		return empresaRepository.findByNombre(nombre, pageable);
 	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Empresa> findAllEmpresas() {
+		return Lists.newArrayList(empresaRepository.findAll());
+	}
+
 	
 
 

@@ -25,8 +25,8 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 	
 	@Override
 	@Transactional(readOnly=true)
-	public List<Empleado> findAll() {
-		return Lists.newArrayList(empleadoRepository.findAll());
+	public Page<Empleado> findAll(Pageable pageable) {
+		return empleadoRepository.findAll(pageable);
 	}
 
 	@Override
