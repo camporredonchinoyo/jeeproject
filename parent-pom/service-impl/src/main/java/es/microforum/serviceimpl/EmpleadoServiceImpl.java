@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.collect.Lists;
 
 import es.microforum.model.Empleado;
+import es.microforum.model.Empresa;
 import es.microforum.repository.EmpleadoRepository;
 import es.microforum.serviceapi.EmpleadoService;
 
@@ -47,12 +48,6 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 		
 	}
 
-//	@Override
-//	@Transactional(readOnly=true)
-//	public Page<Empleado> findAll(Pageable pageable) {
-//	return empleadoRepository.findAll(pageable);
-//	}
-
 	@Override
 	@Transactional(readOnly=true)
 	public Page<Empleado> findByNombre(String nombre, Pageable pageable) {
@@ -62,6 +57,12 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 	@Override
 	public void deleteById(String id) {
 		empleadoRepository.delete(id);
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<Empleado> findAllEmpleados() {
+		return Lists.newArrayList(empleadoRepository.findAll());
 	}
 
 }

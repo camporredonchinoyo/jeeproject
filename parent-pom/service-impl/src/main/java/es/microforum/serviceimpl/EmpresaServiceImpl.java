@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 
-import es.microforum.model.Empleado;
 import es.microforum.model.Empresa;
 import es.microforum.repository.EmpresaRepository;
 import es.microforum.serviceapi.EmpresaService;
@@ -37,13 +36,11 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	@Transactional
 	public Empresa save(Empresa empresa) {
 		return empresaRepository.save(empresa);
 	}
 
 	@Override
-	@Transactional
 	public void delete(Empresa empleado) {
 		empresaRepository.delete(empleado);
 		

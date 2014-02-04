@@ -14,6 +14,9 @@ public interface EmpleadoService {
 	// Find all Empleado
 	public Page<Empleado> findAll(Pageable pageable);
 	
+	// Find all Empleado
+	public List<Empleado> findAllEmpleados();
+	
 	// Find all Empleado by nif
 	public Empleado findByDni(String dni);
 	

@@ -52,11 +52,11 @@ public class EmpresaTest {
 	@Test
 	@Transactional
 	public void testFindAll() {
-		empresas = empresaService.findAll();
+		empresas = empresaService.findAllEmpresas();
 		logger.trace("Ejecutando metodo findAll");
 		assertTrue(empresas.isEmpty());
 		empresaService.save(empresa1);
-		empresas = empresaService.findAll();
+		empresas = empresaService.findAllEmpresas();
 		assertTrue(empresas.size()==1);
 	}
 	
@@ -87,11 +87,11 @@ public class EmpresaTest {
 	public void testDelete() {
 		empresaService.save(empresa1);
 		empresaService.save(empresa2);
-		empresas = empresaService.findAll();
+		empresas = empresaService.findAllEmpresas();
 		assertTrue(empresas.size()==2);
 		logger.trace("Ejecutando metodo testDelete");
 		empresaService.delete(empresa2);
-		empresas = empresaService.findAll();
+		empresas = empresaService.findAllEmpresas();
 		assertTrue(empresas.size()==1);
 	
 	}

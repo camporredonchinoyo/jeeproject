@@ -50,7 +50,7 @@ public class EmpleadoTest {
 	@Test
 	@Transactional
 	public void testFindAll() {
-		List<Empleado> empleados = empleadoService.findAll();
+		List<Empleado> empleados = empleadoService.findAllEmpleados();
 		empleados.size();
 		logger.trace("Ejecutando metodo findAll");
 		assertTrue(empleados.isEmpty());
@@ -81,7 +81,7 @@ public class EmpleadoTest {
 	public void testDelete() {
 		empleadoService.save(empleado2);
 		empleadoService.delete(empleado2);
-		List<Empleado> empleados = empleadoService.findAll();
+		List<Empleado> empleados = empleadoService.findAllEmpleados();
 		assertTrue(empleados.isEmpty());
 	
 	}
