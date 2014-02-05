@@ -34,6 +34,7 @@ public class EmpresaTest {
 	
 	Empresa empresa1;
 	Empresa empresa2;
+	Empresa empresa3;
 	List<Empresa> empresas;
 	
 	@Before
@@ -41,6 +42,7 @@ public class EmpresaTest {
 		//empresaService = contexto.getBean("springJpaEmpresaService", EmpresaService.class); no hace falta porque esta el autowired y se encarga de ello
 		empresa1 = new Empresa("61123123");
 		empresa2 = new Empresa("61123129");
+		empresa3 = new Empresa("a");
 		
 		
 	}
@@ -86,11 +88,12 @@ public class EmpresaTest {
 	@Transactional
 	public void testDelete() {
 		empresaService.save(empresa1);
-		empresaService.save(empresa2);
+		empresaService.save(empresa3);
 		empresas = empresaService.findAllEmpresas();
 		assertTrue(empresas.size()==2);
 		logger.trace("Ejecutando metodo testDelete");
-		empresaService.delete(empresa2);
+		empresaService.deleteById(empresa3.getNif());
+		//empresaService.delete(empresa2);
 		empresas = empresaService.findAllEmpresas();
 		assertTrue(empresas.size()==1);
 	

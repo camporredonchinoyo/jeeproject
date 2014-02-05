@@ -25,6 +25,9 @@ public interface EmpresaService {
 	// Delete a Empresa	
 	public void delete(Empresa empresa);
 	
+	// Delete a Empresa	
+	public void deleteById(String Id);
+	
 	//buscar una empresa por nombre
 	public Page<Empresa> findByNombre(String nombre, Pageable pageable);
 

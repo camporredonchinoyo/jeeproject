@@ -6,6 +6,7 @@ import javax.print.attribute.standard.PagesPerMinuteColor;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.Proxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,6 +81,7 @@ public class EmpleadoController {
 //		}
 		
 		empleadoService.save(empleado);
+		
 		return "redirect:/empleados/" + UrlUtil.encodeUrlPathSegment(empleado.getDni().toString(), httpServletRequest);
 	}
 	
@@ -133,7 +135,7 @@ public class EmpleadoController {
 		uiModel.asMap().clear();
 		redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("empleado_save_success", new Object[] {}, locale)));
 		logger.info("Empleado dni: " + empleado.getDni());
-		
+		empleado.setEmpresa(empresaService.findByNif(empleado.getEmpresa().getNif()));
 		empleadoService.save(empleado);
 		return "redirect:/empleados/" + UrlUtil.encodeUrlPathSegment(empleado.getDni().toString(), httpServletRequest);
 	}
@@ -143,6 +145,7 @@ public class EmpleadoController {
 	public String createForm(Model uiModel) {
 		Empleado empleado = new Empleado();
 		uiModel.addAttribute("empleado", empleado);
+		uiModel.addAttribute("empresas", empresaService.findAllEmpresas());
 		return "empleados/create";
 	}
 
