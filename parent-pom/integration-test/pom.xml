@@ -67,8 +67,12 @@
 			<version>1.1.0.M1</version>
 			<scope>compile</scope>
 		</dependency>
-		
 
+<!--     <dependency> -->
+<!--         <groupId>org.springframework.data</groupId> -->
+<!--         <artifactId>spring-data-rest-webmvc</artifactId> -->
+<!--         <version>2.0.0.RC1</version> -->
+<!--     </dependency> -->
             
 	</dependencies>
 	
@@ -80,6 +84,14 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+<!-- 		<repository> -->
+<!-- 	        <id>spring-milestones</id> -->
+<!-- 	        <name>Spring Milestones</name> -->
+<!-- 	        <url>http://repo.spring.io/milestone</url> -->
+<!-- 	        <snapshots> -->
+<!-- 	            <enabled>false</enabled> -->
+<!-- 	        </snapshots> -->
+<!--     	</repository> -->
 </repositories>
 
 

@@ -40,7 +40,7 @@ import es.microforum.repository.EmpresaRepository;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-data-app-context.xml" })
 //@ActiveProfiles("integration_test")
-public class EmpresaApiRestTest {
+public class EmpleadoApiRestTest {
 
 
 	String jpaWebContext;
@@ -58,7 +58,7 @@ public class EmpresaApiRestTest {
 		DataSource dataSource = (DataSource) context.getBean("dataSource");
 		jdbcTemplate = new JdbcTemplate(dataSource);
 		jpaWebContext = "http://localhost:8081/spring-data-book-rest-1.0.0.BUILD-SNAPSHOT/";
-		jdbcTemplate.execute("DELETE FROM empresa");
+		jdbcTemplate.execute("DELETE FROM empleado");
 	}
 
 	//@Autowired
@@ -67,17 +67,17 @@ public class EmpresaApiRestTest {
 	@Test
 	public void getTest() {
 		try {
-			jdbcTemplate.execute("INSERT INTO empresa values('111A', 'Empresa1', 'palencia 5', '2001-10-10 00:00:00', 1)");
-			Resource<Empresa> resource = getEmpresa(new URI("http://localhost:8081/spring-data-book-rest-1.0.0.BUILD-SNAPSHOT/empresa/111A"));
-			assertTrue(resource.getContent().getNombre().equals("Empresa1"));
+			jdbcTemplate.execute("INSERT INTO empleado values('71134014A', 'Daniel', 'Cabo Noval', 'a tope', 'empleadocol', 29000, 1, 3, null, null, 1)");
+			Resource<Empleado> resource = getEmpleado(new URI("http://localhost:8081/spring-data-book-rest-1.0.0.BUILD-SNAPSHOT/empleado/71134014A"));
+			assertTrue(resource.getContent().getNombre().equals("Daniel"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
 
-	private Resource<Empresa> getEmpresa(URI uri) {
-		return restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<Resource<Empresa>>() {
+	private Resource<Empleado> getEmpleado(URI uri) {
+		return restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<Resource<Empleado>>() {
 		}).getBody();
 
 	}
@@ -85,22 +85,22 @@ public class EmpresaApiRestTest {
 	@Test
 	public void deleteTest() {
 		try {
-			jdbcTemplate.execute("INSERT INTO empresa values('111B', 'Empresa1', 'palencia 5', '2001-10-10 00:00:00', 1)");
-			int count = jdbcTemplate.queryForObject("select count(*) from empresa where nif='111B'", Integer.class);
+			jdbcTemplate.execute("INSERT INTO empleado values('71134014Z', 'Daniel', 'Cabo Noval', 'a tope', 'empleadocol', 29000, 1, 3, null, null, 1)");
+			int count = jdbcTemplate.queryForObject("select count(*) from empleado where dni='71134014Z'", Integer.class);
 			assertTrue(count == 1);
-			restTemplate.delete(jpaWebContext + "empresa/111B");
+			restTemplate.delete(jpaWebContext + "empleado/71134014Z");
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-		int count = jdbcTemplate.queryForObject("select count(*) from empresa where nif='111B'", Integer.class);
+		int count = jdbcTemplate.queryForObject("select count(*) from empleado where dni='71134014Z'", Integer.class);
 		assertTrue(count == 0);
 	}
 	
 	@Test
 	public void postTest() throws RestClientException, URISyntaxException {
 		//jdbcTemplate.execute("DELETE FROM empresa where nombre like 'BORRAR!%'");
-		String url = jpaWebContext + "empresa";
+		String url = jpaWebContext + "empleado";
 		String acceptHeaderValue = "application/json";
 
 		HttpHeaders requestHeaders = new HttpHeaders();
@@ -111,7 +111,7 @@ public class EmpresaApiRestTest {
 		HttpMethod post = HttpMethod.POST;
 
 		//String body = "{\"codUsr\":\"test\",\"nomSubtipoSer\":\"BORRAR!\",\"fecActu\":\"2011-11-17\",\"desSubtipoSer\":\"BORRAR!\",\"tipoSerie\":{\"codTipoSerie\":\"1\"}}";
-		String body = "{\"nombre\":\"Empresa1\",\"direccionFiscal\":\"Palencia 5\",\"fechaInicioActividades\":\"2014-01-01\",\"version\":\"3\",\"nif\":\"111D\"}";
+		String body = "{\"nombre\":\"Empresa1\",\"direccionFiscal\":\"Palencia 5\",\"fechaInicioActividades\":\"2014-01-01\",\"version\":\"3\",\"dni\":\"71134014R\"}";
 		HttpEntity<String> entity = new HttpEntity<String>(body, requestHeaders);
 
 		ResponseEntity<String> response = restTemplate.exchange(url, post, entity, String.class);
@@ -121,36 +121,37 @@ public class EmpresaApiRestTest {
 		//jdbcTemplate.execute("DELETE FROM subtipo_serie where nom_subtipo_ser like 'BORRAR!%'");
 	}
 	
-
-	@Test
-	public void putTest() throws RestClientException, URISyntaxException {
-		jdbcTemplate.execute("INSERT INTO empresa values('111R', 'Empresa1', 'palencia 5', '2001-10-10 00:00:00', 1)");
-		String url = jpaWebContext + "empresa/111R";
-		String acceptHeaderValue = "application/json";
-
-		HttpHeaders requestHeaders = new HttpHeaders();
-		List<MediaType> mediaTypes = new ArrayList<MediaType>();
-		mediaTypes.add(MediaType.valueOf(acceptHeaderValue));
-		requestHeaders.setAccept(mediaTypes);
-		requestHeaders.setContentType(MediaType.valueOf(acceptHeaderValue));
-		HttpMethod put = HttpMethod.PUT;
-
-		String body = "{\"nombre\":\"Empresa2\"}";
-		HttpEntity<String> entity = new HttpEntity<String>(body, requestHeaders);
-
-		ResponseEntity<String> response = restTemplate.exchange(url, put, entity, String.class);
-		assertTrue(response.getStatusCode().equals(HttpStatus.NO_CONTENT));
-		int count = jdbcTemplate.queryForObject("select count(*) from empresa where nif='111R'", Integer.class);
-		assertTrue(count == 1);
-		//jdbcTemplate.execute("DELETE FROM subtipo_serie where nom_subtipo_ser = 'MODIFICADO!'");
-	}
-	
-	@After
-	public void after() {
-		jdbcTemplate.execute("DELETE FROM empresa");
-	}
+//
+//	@Test
+//	public void putTest() throws RestClientException, URISyntaxException {
+//		jdbcTemplate.execute("INSERT INTO empresa values('111R', 'Empresa1', 'palencia 5', '2001-10-10 00:00:00', 1)");
+//		String url = jpaWebContext + "empresa/111R";
+//		String acceptHeaderValue = "application/json";
+//
+//		HttpHeaders requestHeaders = new HttpHeaders();
+//		List<MediaType> mediaTypes = new ArrayList<MediaType>();
+//		mediaTypes.add(MediaType.valueOf(acceptHeaderValue));
+//		requestHeaders.setAccept(mediaTypes);
+//		requestHeaders.setContentType(MediaType.valueOf(acceptHeaderValue));
+//		HttpMethod put = HttpMethod.PUT;
+//
+//		String body = "{\"nombre\":\"Empresa2\"}";
+//		HttpEntity<String> entity = new HttpEntity<String>(body, requestHeaders);
+//
+//		ResponseEntity<String> response = restTemplate.exchange(url, put, entity, String.class);
+//		assertTrue(response.getStatusCode().equals(HttpStatus.NO_CONTENT));
+//		int count = jdbcTemplate.queryForObject("select count(*) from empresa where nif='111R'", Integer.class);
+//		assertTrue(count == 1);
+//		//jdbcTemplate.execute("DELETE FROM subtipo_serie where nom_subtipo_ser = 'MODIFICADO!'");
+//	}
+//	
+//	@After
+//	public void after() {
+//		jdbcTemplate.execute("DELETE FROM empleado");
+//	}
 	
 	
 
 
 }
+
