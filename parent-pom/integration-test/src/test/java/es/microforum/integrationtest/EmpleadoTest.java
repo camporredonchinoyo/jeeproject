@@ -85,5 +85,18 @@ public class EmpleadoTest {
 		assertTrue(empleados.isEmpty());
 	
 	}
+	
+	@Test
+	@Transactional
+	public void testVariarSueldoEmpleados(){
+		// Pocentaje a aumentar
+		double porcentaje = 10.0;
+		Empleado empleado = empleadoService.findByDni("71134014");
+		double sueldoNoModificado = empleado.getSalarioAnual();
+		empleadoService.variarSueldoEmpleado(porcentaje);
+		empleado = empleadoService.findByDni("71134014"); 
+		assertTrue(sueldoNoModificado != empleado.getSalarioAnual());
+		assertTrue(((sueldoNoModificado * porcentaje) / 100) + sueldoNoModificado == empleado.getSalarioAnual());
+	}
 
 }

@@ -31,4 +31,7 @@ public interface EmpleadoService {
 	
 	//buscar un empleado por nombre
 	public Page<Empleado> findByNombre(String nombre, Pageable pageable);
+	
+	//modifica sueldos todos los empleados
+	public abstract void variarSueldoEmpleado(double porcentaje);
 }
