@@ -91,6 +91,7 @@ public class EmpleadoTest {
 	public void testVariarSueldoEmpleados(){
 		// Pocentaje a aumentar
 		double porcentaje = 10.0;
+		empleadoService.save(empleado2);
 		Empleado empleado = empleadoService.findByDni("71134014");
 		double sueldoNoModificado = empleado.getSalarioAnual();
 		empleadoService.variarSueldoEmpleado(porcentaje);

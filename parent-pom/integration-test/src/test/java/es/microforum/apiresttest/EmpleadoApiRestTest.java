@@ -85,7 +85,7 @@ public class EmpleadoApiRestTest {
 	@Test
 	public void deleteTest() {
 		try {
-			jdbcTemplate.execute("INSERT INTO empleado values('71134014Z', 'Daniel', 'Cabo Noval', 'a tope', 'empleadocol', 29000, 1, 3, null, null, 1)");
+			jdbcTemplate.execute("INSERT INTO empleado values('71134014Z', 'Daniel', 'Cabo Noval', 'tipo empleado', 'empleadocol', 29000, 1, 3, null, null, 1)");
 			int count = jdbcTemplate.queryForObject("select count(*) from empleado where dni='71134014Z'", Integer.class);
 			assertTrue(count == 1);
 			restTemplate.delete(jpaWebContext + "empleado/71134014Z");
@@ -111,12 +111,13 @@ public class EmpleadoApiRestTest {
 		HttpMethod post = HttpMethod.POST;
 
 		//String body = "{\"codUsr\":\"test\",\"nomSubtipoSer\":\"BORRAR!\",\"fecActu\":\"2011-11-17\",\"desSubtipoSer\":\"BORRAR!\",\"tipoSerie\":{\"codTipoSerie\":\"1\"}}";
-		String body = "{\"nombre\":\"Empresa1\",\"direccionFiscal\":\"Palencia 5\",\"fechaInicioActividades\":\"2014-01-01\",\"version\":\"3\",\"dni\":\"71134014R\"}";
+		String body = "{\"dni\":\"71134014Z\",\"nombre\":\"Daniel\",\"direccion\":\"Cabo Noval\",\"tipoEmpleado\":\"tipo empleado\",\"empleadocol\":\"empleadocol\","
+				+"\"salarioAnual\":\"29000\",\"valorHora\":\"1\",\"cantidadHoras\":\"3\",\"version\":\"1\"}";
 		HttpEntity<String> entity = new HttpEntity<String>(body, requestHeaders);
 
 		ResponseEntity<String> response = restTemplate.exchange(url, post, entity, String.class);
 		assertTrue(response.getStatusCode().equals(HttpStatus.CREATED));
-		int count = jdbcTemplate.queryForObject("select count(*) from empresa where nif='111D'", Integer.class);
+		int count = jdbcTemplate.queryForObject("select count(*) from empleado where dni='71134014Z'", Integer.class);
 		assertTrue(count == 1);
 		//jdbcTemplate.execute("DELETE FROM subtipo_serie where nom_subtipo_ser like 'BORRAR!%'");
 	}
