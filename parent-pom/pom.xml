@@ -14,6 +14,7 @@
 		<hibernatevalidator.version>4.2.0.Final</hibernatevalidator.version>
 		<springdatajpa.version>1.1.0.RELEASE</springdatajpa.version>
 		<spring-data-commons-core.version>1.3.1.RELEASE</spring-data-commons-core.version>
+		<springdatarest.version>1.1.0.M1</springdatarest.version>
 		<org.springsecurity-version>3.2.0.RELEASE</org.springsecurity-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<com.google.guava.version>10.0.1</com.google.guava.version>
@@ -34,6 +35,8 @@
 		<javaxvalidation.version>1.0.0.GA</javaxvalidation.version>
 		<commonsfileupload.version>1.2</commonsfileupload.version>
 		<asm.version>3.1</asm.version>
+		<jaxwsrt.version>2.2.8</jaxwsrt.version>
+		<jaxspring.version>1.9</jaxspring.version>
 	</properties>
 
 	<dependencies>
@@ -139,6 +142,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
 				<artifactId>spring-webmvc</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
@@ -161,6 +169,12 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-test</artifactId>
 				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-rest-webmvc</artifactId>
+				<version>${springdatarest.version}</version>
+				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate.javax.persistence</groupId>
@@ -218,30 +232,36 @@
 				<artifactId>spring-security-taglibs</artifactId>
 				<version>${org.springsecurity-version}</version>
 			</dependency>
-			<!-- Mock Object Library -->
 			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-core</artifactId>
 				<version>${mockitocore.version}</version>
 				<scope>test</scope>
 			</dependency>
-			<!-- Xerces -->
 			<dependency>
 				<groupId>xerces</groupId>
 				<artifactId>xercesImpl</artifactId>
 				<version>${xerces.version}</version>
 			</dependency>
-			<!-- FileUpload -->
 			<dependency>
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
 				<version>${commonsfileupload.version}</version>
 			</dependency>
-			<!-- ASM -->
 			<dependency>
 				<groupId>asm</groupId>
 				<artifactId>asm</artifactId>
 				<version>${asm.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.ws</groupId>
+				<artifactId>jaxws-rt</artifactId>
+				<version>${jaxwsrt.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jvnet.jax-ws-commons.spring</groupId>
+				<artifactId>jaxws-spring</artifactId>
+				<version>${jaxspring.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -251,6 +271,7 @@
 		<module>service-api</module>
 		<module>service-impl</module>
 		<module>service-frontend</module>
+		<module>service-frontend-soap</module>
 		<module>web-frontend</module>
 	</modules>
 
@@ -263,8 +284,19 @@
 					<source>1.7</source>
 					<target>1.7</target>
 				</configuration>
+				<version>2.3.2</version>
 			</plugin>
 		</plugins>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>spring-libs-milestone</id>
+			<url>http://repo.springsource.org/libs-milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 </project>
